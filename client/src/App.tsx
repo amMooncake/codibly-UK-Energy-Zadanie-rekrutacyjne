@@ -1,14 +1,6 @@
-import React, {useEffect, useState} from 'react';
-
-interface GenerationMix {
-  fuel: string;
-  perc: number;
-}
-
-interface DailyData {
-  date: string;
-  generationmix: GenerationMix[];
-}
+import React, { useEffect, useState } from 'react';
+import PieChartExample from './components/PieChart';
+import { DailyData } from './types.js';
 
 function App() {
   const [backendData, setBackendData] = useState<DailyData[]>([]);
@@ -18,14 +10,22 @@ function App() {
       .then(response => response.json())
       .then(data => setBackendData(data));
   }, []);
-  console.log(backendData);
+
+  console.log("data:", backendData[0]?.generationmix);
 
   return (
     <div>
+
       {typeof backendData[0] === 'undefined' ? (
         <p>Loading...</p>
       ) : (
-        <p>{backendData[0].date.toString()}</p>
+        <>
+          <PieChartExample isAnimationActive={false} data={backendData[0].generationmix} date={backendData[0].date} />
+          <PieChartExample isAnimationActive={false} data={backendData[1].generationmix} date={backendData[0].date} />
+          <PieChartExample isAnimationActive={false} data={backendData[2].generationmix} date={backendData[0].date} />
+        </>
+
+
       )
       }
     </div>

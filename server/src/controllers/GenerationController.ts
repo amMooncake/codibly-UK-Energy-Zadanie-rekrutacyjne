@@ -3,6 +3,7 @@ import { IntervalData } from '../types.js';
 
 export const getGenerationData = async (req: Request, res: Response) => {
     try {
+        //composing date range for API request
         const now = new Date();
         const from = new Date(now);
         from.setUTCHours(0, 1, 0, 0);
