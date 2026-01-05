@@ -11,7 +11,7 @@ function App() {
       .then(data => setBackendData(data));
   }, []);
 
-  console.log("data:", backendData[0]?.generationmix);
+  // console.log("data:", backendData[0]?.generationmix);
 
   return (
     <div>
@@ -21,8 +21,8 @@ function App() {
       ) : (
         <>
           <PieChartExample isAnimationActive={false} data={backendData[0].generationmix} date={backendData[0].date} />
-          <PieChartExample isAnimationActive={false} data={backendData[1].generationmix} date={backendData[0].date} />
-          <PieChartExample isAnimationActive={false} data={backendData[2].generationmix} date={backendData[0].date} />
+          <PieChartExample isAnimationActive={false} data={backendData[1].generationmix} date={backendData[1].date} />
+          <PieChartExample isAnimationActive={false} data={backendData[2].generationmix} date={backendData[2].date} />
         </>
 
 

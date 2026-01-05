@@ -20,6 +20,7 @@ export const getGenerationData = async (req: Request, res: Response) => {
 
         const groupedData: Record<string, Record<string, { sum: number; count: number }>> = {};
 
+        //grouping data and summing each fuel type
         if (apiResponse.data) {
             apiResponse.data.forEach((interval: IntervalData) => {
                 const date = interval.from.slice(0, 10); // date format example: "2026-01-04"
@@ -40,7 +41,7 @@ export const getGenerationData = async (req: Request, res: Response) => {
 
         console.log(groupedData);
 
-        //data for response
+        //composing data for response
         const result = Object.entries(groupedData).map(([date, fuelsData]) => {
             const generationmix = Object.entries(fuelsData).map(([fuel, { sum, count }]) => (
                 {

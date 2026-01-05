@@ -1,0 +1,80 @@
+hours = 6; //from post example
+
+interface GenerationMix {
+    fuel: string;
+    perc: number;
+}
+
+interface IntervalData {
+    from: string;
+    to: string;
+    generationmix: GenerationMix[];
+}
+
+const ECO = [
+    "biomass", "nuclear", "hydro", "wind", "solar"
+]
+
+bestChrgingTime = {from, to, ecoGenerationPerc}
+ecoGenerationPerc_max = 0
+
+for( i = 0; i++; i < 96 - hours * 2): // 24 * 2 (every 30 minutes) * 2 (two days) - hours * 2 (every 30 minutes)
+    currEcoGeneration = 0
+    foreach(item in intervalData.slice[i, hours*2+i]):
+        if(item.fuel is ECO):
+            currEcoGeneration += item.perc
+    if currEcoGeneration > ecoGenerationPerc_max:
+        bestChargingTme = {
+            item.from,
+            item.to,
+            currEcoGeneration
+        }
+        ecoGenerationPerc_max = currEcoGeneration
+
+
+
+
+        const data = [
+  {
+    name: '18-24',
+    uv: 31.47,
+    pv: 2400,
+    fill: ,
+  },
+  {
+    name: '25-29',
+    uv: 26.69,
+    pv: 4567,
+    fill: ,
+  },
+  {
+    name: '30-34',
+    uv: -15.69,
+    pv: 1398,
+    fill: ,
+  },
+  {
+    name: '35-39',
+    uv: 8.22,
+    pv: 9800,
+    fill: ,
+  },
+  {
+    name: '40-49',
+    uv: -8.63,
+    pv: 3908,
+    fill: ,
+  },
+  {
+    name: '50+',
+    uv: -2.63,
+    pv: 4800,
+    fill: ,
+  },
+  {
+    name: 'unknown',
+    uv: 6.67,
+    pv: 4800,
+    fill: ,
+  },
+];
