@@ -1,5 +1,5 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
-import { GenerationMix } from '../types';
+import { GenerationMix } from '../../../types';
 
 
 const ECO_COLORS: string[] = [
@@ -52,13 +52,16 @@ export default function PieChartExample({ isAnimationActive = true, data, date }
     ];
 
     return <PieChart
-        style={{ width: '100%', maxWidth: '500px', maxHeight: '80vh', aspectRatio: 1 }}
-        margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+        style={{ width: '100%', maxWidth: '450px', maxHeight: '450px', aspectRatio: 1 }}
+        margin={{ top: 0, right: 50, bottom: 10, left: 50 }}
     >
 
         <text x="50%" y="20" textAnchor="middle" dominantBaseline="middle" fill="#333" style={{ fontSize: '16px', fontWeight: 'bold' }}>
             Generation Mix {date}
         </text>
+        <p>
+            TODAY
+        </p>
 
         <Pie
             data={data as any}
@@ -86,12 +89,13 @@ export default function PieChartExample({ isAnimationActive = true, data, date }
             outerRadius="25%"
             labelLine={false}
 
-            label={({ cx, cy, midAngle, innerRadius, outerRadius, value, name }) => {
-                const radius = (innerRadius ?? 0) + ((outerRadius ?? 0) - (innerRadius ?? 0)) * 0.5;
-                const x = (cx ?? 0) + radius * Math.cos(-(midAngle ?? 0) * RADIAN);
-                const y = (cy ?? 0) + radius * Math.sin(-(midAngle ?? 0) * RADIAN);
-                return <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central" style={{ fontSize: '15px', fontWeight: 'bold' }}>{name}</text>
-            }}
+            // label={({ cx, cy, midAngle, innerRadius, outerRadius, value, name }) => {
+            //     const radius = (innerRadius ?? 0) + ((outerRadius ?? 0) - (innerRadius ?? 0)) * 0.5;
+            //     const x = (cx ?? 0) + radius * Math.cos(-(midAngle ?? 0) * RADIAN);
+            //     const y = (cy ?? 0) + radius * Math.sin(-(midAngle ?? 0) * RADIAN);
+            //     return <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central" style={{ fontSize: '15px', fontWeight: 'bold' }}>{name}</text>
+            // }}
+
             isAnimationActive={isAnimationActive}
         >
             <Cell key={`cell-1`} fill={ECO_COLORS[1]} />
@@ -102,14 +106,14 @@ export default function PieChartExample({ isAnimationActive = true, data, date }
             verticalAlign="bottom"
             align="center"
             content={() => (
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ width: '12px', height: '12px', backgroundColor: ECO_COLORS[1] }}></div>
-                        <span style={{ fontSize: '14px', color: '#333' }}>Eco: {ecoPerc}%</span>
+                <div className="flex justify-center gap-5 mt-2.5">
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3" style={{ backgroundColor: ECO_COLORS[1] }}></div>
+                        <span className="text-sm text-gray-800">Eco: {ecoPerc}%</span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ width: '12px', height: '12px', backgroundColor: NON_ECO_COLORS[2] }}></div>
-                        <span style={{ fontSize: '14px', color: '#333' }}>Non-Eco: {100 - ecoPerc}%</span>
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3" style={{ backgroundColor: NON_ECO_COLORS[2] }}></div>
+                        <span className="text-sm text-gray-800">Non-Eco: {Math.round((100 - ecoPerc) * 100) / 100}%</span>
                     </div>
                 </div>
             )}
