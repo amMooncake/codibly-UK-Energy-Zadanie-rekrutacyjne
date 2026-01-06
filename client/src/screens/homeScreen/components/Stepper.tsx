@@ -2,12 +2,11 @@ import * as React from "react"
 import { Minus, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export default function Stepper() {
-    const [value, setValue] = React.useState(3)
 
+export default function Stepper({ hours, setHours }: {hours: number, setHours: React.Dispatch<React.SetStateAction<number>>}) {
     function handleValueChange(newValue: number) {
         if (newValue >= 1 && newValue <= 6) {
-            setValue(newValue)
+            setHours(newValue)
         }
     }
 
@@ -15,7 +14,7 @@ export default function Stepper() {
         <div className="flex items-center justify-between">
             <div className="flex items-center border rounded-lg overflow-hidden bg-background">
                 <div className="px-4 py-2 text-sm font-medium min-w-12 text-center">
-                    {value}
+                    {hours}
                 </div>
 
                 <div className="flex border-l">
@@ -23,7 +22,7 @@ export default function Stepper() {
                         variant="ghost"
                         size="icon"
                         className="h-9 w-9 rounded-none border-r"
-                        onClick={() => handleValueChange(value - 1)}
+                        onClick={() => handleValueChange(hours - 1)}
                     >
                         <Minus className="h-4 w-4" />
                     </Button>
@@ -31,7 +30,7 @@ export default function Stepper() {
                         variant="ghost"
                         size="icon"
                         className="h-9 w-9 rounded-none"
-                        onClick={() => handleValueChange(value + 1)}
+                        onClick={() => handleValueChange(hours + 1)}
                     >
                         <Plus className="h-4 w-4" />
                     </Button>

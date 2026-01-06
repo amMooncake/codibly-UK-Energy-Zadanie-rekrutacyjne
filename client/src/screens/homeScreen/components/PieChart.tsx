@@ -25,7 +25,7 @@ const ECO = [
 
 const RADIAN = Math.PI / 180;
 
-export default function PieChartExample({ isAnimationActive = true, dailyData, date}: { isAnimationActive?: boolean, dailyData: DailyData, date: string }) {
+export default function MyPieChart({ isAnimationActive = true, dailyData, date}: { isAnimationActive?: boolean, dailyData: DailyData, date: string }) {
     let ecoPerc: number = 0;
 
     // remove entries with 0 percentage
