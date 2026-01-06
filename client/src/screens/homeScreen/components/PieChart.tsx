@@ -1,5 +1,5 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
-import { GenerationMix } from '../../../types';
+import { DailyData } from '../../../types';
 
 
 const ECO_COLORS: string[] = [
@@ -25,11 +25,11 @@ const ECO = [
 
 const RADIAN = Math.PI / 180;
 
-export default function PieChartExample({ isAnimationActive = true, data, date }: { isAnimationActive?: boolean, data: GenerationMix[], date?: string }) {
+export default function PieChartExample({ isAnimationActive = true, dailyData, date}: { isAnimationActive?: boolean, dailyData: DailyData, date: string }) {
     let ecoPerc: number = 0;
 
     // remove entries with 0 percentage
-    data = data.filter(entry => entry.perc > 0);
+    const data = dailyData.generationmix.filter(entry => entry.perc > 0);
 
     // sort array
     data.sort((a, b) => {
@@ -52,16 +52,12 @@ export default function PieChartExample({ isAnimationActive = true, data, date }
     ];
 
     return <PieChart
-        style={{ width: '100%', maxWidth: '450px', maxHeight: '450px', aspectRatio: 1 }}
+        style={{ width: '100%', maxWidth: '450px', maxHeight: '450px', aspectRatio: 1.2 }}
         margin={{ top: 0, right: 50, bottom: 10, left: 50 }}
     >
-
-        <text x="50%" y="20" textAnchor="middle" dominantBaseline="middle" fill="#333" style={{ fontSize: '16px', fontWeight: 'bold' }}>
-            Generation Mix {date}
+        <text x="50%" y="5%" textAnchor="middle" dominantBaseline="middle" className="font-light">
+            {date}
         </text>
-        <p>
-            TODAY
-        </p>
 
         <Pie
             data={data as any}
@@ -106,7 +102,7 @@ export default function PieChartExample({ isAnimationActive = true, data, date }
             verticalAlign="bottom"
             align="center"
             content={() => (
-                <div className="flex justify-center gap-5 mt-2.5">
+                <div className="flex justify-center gap-5">
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3" style={{ backgroundColor: ECO_COLORS[1] }}></div>
                         <span className="text-sm text-gray-800">Eco: {ecoPerc}%</span>

@@ -2,7 +2,7 @@
 export function Topbar() {
     return (
         <header className="sticky top-0 w-full bg-white ">
-            <div className="flex h-14 items-center justify-between px-10">
+            <div className="flex h-14 items-center justify-between px-20">
 
                 <a className="flex items-center" href="/">
                     <span className="font-bold sm:inline-block">
