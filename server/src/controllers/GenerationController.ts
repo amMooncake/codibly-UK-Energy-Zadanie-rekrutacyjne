@@ -1,28 +1,16 @@
 import { Request, Response } from 'express';
 import { IntervalData } from '../types.js';
+import { fetchGenerationData } from '../services/CarbonIntensityfetch.js';
 
 export const getGenerationData = async (req: Request, res: Response) => {
     try {
-        //composing date range for API request
-        const now = new Date();
-        const from = new Date(now);
-        from.setUTCHours(0, 1, 0, 0);
-
-        const to: Date = new Date(now);
-        to.setDate(to.getDate() + 2);
-        to.setUTCHours(23, 59, 0, 0);
-
-        const formatDate = (date: Date) => date.toISOString().slice(0, 16) + 'Z';
-        const response = await fetch(`https://api.carbonintensity.org.uk/generation/${formatDate(from)}/${formatDate(to)}`);
-
-        const apiResponse = await response.json();
-
+        const data = await fetchGenerationData();
 
         const groupedData: Record<string, Record<string, { sum: number; count: number }>> = {};
 
         //grouping data and summing each fuel type
-        if (apiResponse.data) {
-            apiResponse.data.forEach((interval: IntervalData) => {
+        if (data) {
+            data.forEach((interval: IntervalData) => {
                 const date = interval.from.slice(0, 10); // date format example: "2026-01-04"
                 if (!groupedData[date]) {
                     groupedData[date] = {};
@@ -39,7 +27,7 @@ export const getGenerationData = async (req: Request, res: Response) => {
             });
         }
 
-        console.log(groupedData);
+        // console.log(groupedData);
 
         //composing data for response
         const result = Object.entries(groupedData).map(([date, fuelsData]) => {

@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip, Legend, LabelList } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { GenerationMix } from '../types';
 
 
@@ -43,8 +43,8 @@ export default function PieChartExample({ isAnimationActive = true, data, date }
     //calculating percentage of eco energy
     data.forEach(element => {
         if (ECO.includes(element.fuel)) ecoPerc += element.perc
-
     });
+    ecoPerc = Math.round(ecoPerc * 100) / 100
 
     const ecoData = [
         { name: 'eco', value: ecoPerc },
