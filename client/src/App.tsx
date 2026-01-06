@@ -17,9 +17,8 @@ function App() {
 
   return (
     <>
-
       <div className=" bg-white min-h-screen">
-        {typeof generationData[0] === 'undefined' ? (
+        {generationData.length === 0 ? (
           <LoadingScreen></LoadingScreen>
         ) : (
           <HomeScreen generationData={generationData}></HomeScreen>

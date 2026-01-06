@@ -23,7 +23,7 @@ const ECO = [
     'biomass', 'nuclear', 'hydro', 'wind', 'solar'
 ]
 
-const RADIAN = Math.PI / 180;
+// const RADIAN = Math.PI / 180;
 
 export default function MyPieChart({ isAnimationActive = true, dailyData, date}: { isAnimationActive?: boolean, dailyData: DailyData, date: string }) {
     let ecoPerc: number = 0;
