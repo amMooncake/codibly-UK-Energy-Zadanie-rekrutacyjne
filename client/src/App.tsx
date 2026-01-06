@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PieChartExample from './components/PieChart';
 import { DailyData, BestWindow } from './types.js';
 
+import { Spinner } from "@/components/ui/spinner"
+
 function App() {
   const [generationData, setGenerationData] = useState<DailyData[]>([]);
   const [backendData, setBackendData] = useState<BestWindow | null>(null);
@@ -36,11 +38,26 @@ function App() {
 
   return (
     <div>
+
+      <h1 className="text-3xl font-bold underline">
+        Hello world!
+      </h1>
+
+      {typeof generationData[0] === 'undefined' ? (
+        <Spinner></Spinner>
+      ) : (
+        <>
+          <PieChartExample isAnimationActive={false} data={generationData[0].generationmix} date={generationData[0].date} />
+          <PieChartExample isAnimationActive={false} data={generationData[1].generationmix} date={generationData[1].date} />
+          <PieChartExample isAnimationActive={false} data={generationData[2].generationmix} date={generationData[2].date} />
+        </>
+      )}
+
       <div>
         <h2>Find Best Charging Window</h2>
-        <input 
-          type="number" 
-          value={hours} 
+        <input
+          type="number"
+          value={hours}
           onChange={(e) => setHours(Number(e.target.value))}
           min="1"
           max="6"
@@ -57,16 +74,6 @@ function App() {
           <p>To: {backendData.to}</p>
           <p>Average Eco Percentage: {backendData.averageEcoPercent}%</p>
         </div>
-      )}
-
-      {typeof generationData[0] === 'undefined' ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <PieChartExample isAnimationActive={false} data={generationData[0].generationmix} date={generationData[0].date} />
-          <PieChartExample isAnimationActive={false} data={generationData[1].generationmix} date={generationData[1].date} />
-          <PieChartExample isAnimationActive={false} data={generationData[2].generationmix} date={generationData[2].date} />
-        </>
       )}
     </div>
   );
