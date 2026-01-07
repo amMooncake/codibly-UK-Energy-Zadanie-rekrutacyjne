@@ -46,8 +46,9 @@ docker build -t uk-energy-app .
 Once the image is built, run the following command to start the container.
 
 ```bash
-docker run -d -p 5001:5001 uk-energy-app
+docker run -d -p 8080:8080 uk-energy-app
+
 ```
 
 This will run on your local machine on port 5001 inside the container.
-http://localhost:5001
+http://localhost:8080

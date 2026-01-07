@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = 8080;
 
 //absolute path to the public directory for the server
 const __filename = fileURLToPath(import.meta.url);
