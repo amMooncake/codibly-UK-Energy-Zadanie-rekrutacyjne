@@ -4,6 +4,7 @@ import { BestWindow } from "@/types";
 import MyPieChart from './components/PieChart';
 import { DailyData } from '../../types.js';
 import Topbar from '../../components/Topbar';
+import Footer from '../../components/Footer';
 import { Button } from "@/components/ui/button"
 import Stepper from './components/Stepper';
 import BestTimeToChargeCard from './components/BestToChargeCard';
@@ -18,7 +19,7 @@ export default function HomeScreen({ generationData }: { generationData: DailyDa
 
     const handleBestWindowFetch = () => {
         setLoadingBestWindow(true);
-        console.log(loadingBestWindow);
+        // console.log(loadingBestWindow);
         fetch('/api/generationmix/best-window', {
             method: 'POST',
             headers: {
@@ -40,15 +41,19 @@ export default function HomeScreen({ generationData }: { generationData: DailyDa
 
     return <>
         <Topbar />
+        <div className='p-4 sm:p-10 mx-3 mb-3 sm:mb-10 sm:mx-10 sm:mt-5 flex flex-col items-center justify-center bg-slate-700 rounded-xl'>
+            <p className='mb-5 text-xl font-bold text-center text-white'> Electric Vehicle Charging Optimizer </p>
+            <div className='flex flex-col w-fit'>
+                <div className='flex flex-col'>
+                    <p className='text-white text-start'>Select number of hours</p>
 
-        <div className='p-10 mx-10 my-10 flex flex-col justify-center bg-slate-700 rounded-xl'>
-            <p className='mb-10 text-xl font-bold text-center text-white'> EV Charging Optimizer </p>
-            <div className='flex flex-col justify-between items-center'>
-                <div className='flex flex-row gap-5'>
-                    <Stepper hours={hours} setHours={setHours}></Stepper>
-                    <Button variant="outline" onClick={() => {
-                        handleBestWindowFetch();
-                    }}>Find Optimal Window</Button>
+                    <div className='my-2 flex flex-col sm:flex-row gap-4'>
+                        <Stepper hours={hours} setHours={setHours}></Stepper>
+                        <Button className='w-fit' variant="outline" onClick={() => {
+                            handleBestWindowFetch();
+                        }} >Find Optimal Window</Button>
+                    </div>
+
                 </div>
                 <div className='flex flex-col justify-center w-fit' >
                     <p className='mt-2 mb-1 font-bold text-white'>Best time to charge:</p>
@@ -66,19 +71,15 @@ export default function HomeScreen({ generationData }: { generationData: DailyDa
         </div>
 
         <div className='flex flex-col'>
-            <div className='mx-10 py-10 bg-slate-100 rounded-xl '>
+            <div className='mx-3 py-10 sm:mx-10 bg-slate-100 rounded-xl '>
                 <p className='mb-10 text-xl font-bold text-center'> UK Energy Mix Forecast </p>
                 <div className='flex flex-row flex-wrap justify-center'>
                     <MyPieChart isAnimationActive={false} dailyData={generationData[0]} date={"Today"} />
                     <MyPieChart isAnimationActive={false} dailyData={generationData[1]} date={"Tomorrow"} />
                     <MyPieChart isAnimationActive={false} dailyData={generationData[2]} date={"Day After Tomorrow"} />
-
                 </div>
             </div>
-
-
-
-
         </div>
+        <Footer></Footer>
     </>
 }

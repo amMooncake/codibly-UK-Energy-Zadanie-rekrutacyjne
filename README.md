@@ -2,6 +2,8 @@
 
 This projectprovide data on the carbon intensity of the UK's national grid. It fetches data from the National Grid ESO API to display the current fuel mix for energy generation and calculates the optimal time window to charge.
 
+visit the website: https://codibly-uk-energy-zadanie-rekrutacyjne.onrender.com/
+
 ## Technologies Used
 
 ### Frontend
@@ -50,5 +52,5 @@ docker run -d -p 8080:8080 uk-energy-app
 
 ```
 
-This will run on your local machine on port 5001 inside the container.
+This will run on your local machine on port 8080 inside the container.
 http://localhost:8080
