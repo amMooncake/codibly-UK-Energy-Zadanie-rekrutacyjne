@@ -6,7 +6,7 @@ import { DailyData } from '../../types.js';
 import Topbar from '../../components/Topbar';
 import { Button } from "@/components/ui/button"
 import Stepper from './components/Stepper';
-import BestTimeToCharge from './components/BestToCharge';
+import BestTimeToChargeCard from './components/BestToChargeCard';
 import { Spinner } from '@/components/ui/spinner';
 
 export default function HomeScreen({ generationData }: { generationData: DailyData[] }) {
@@ -53,7 +53,7 @@ export default function HomeScreen({ generationData }: { generationData: DailyDa
                 <div className='flex flex-col justify-center w-fit' >
                     <p className='mt-2 mb-1 font-bold text-white'>Best time to charge:</p>
                     <div className="relative">
-                        <BestTimeToCharge bestWindowData={bestWindowData}></BestTimeToCharge>
+                        <BestTimeToChargeCard bestWindowData={bestWindowData}></BestTimeToChargeCard>
                         {loadingBestWindow && (
                             <div className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center rounded-xl">
                                 <Spinner></Spinner>
