@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Node modules
+node_modules
+client/node_modules
+server/node_modules
+
+# Build outputs
+client/dist
+server/dist
+
+# IDE and OS specific
+.idea
+.vscode
+*.suo
+*.user
+*.sln
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docs
+README.md
