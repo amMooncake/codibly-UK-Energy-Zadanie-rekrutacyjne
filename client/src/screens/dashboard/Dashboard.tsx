@@ -10,7 +10,7 @@ import Stepper from './components/Stepper';
 import BestTimeToChargeCard from './components/BestToChargeCard';
 import { Spinner } from '@/components/ui/spinner';
 
-export default function HomeScreen({ generationData }: { generationData: DailyData[] }) {
+export default function Dashboard({ generationData }: { generationData: DailyData[] }) {
 
     const [bestWindowData, setbestWindowData] = useState<BestWindow | null>(null);
     const [hours, setHours] = useState<number>(3);

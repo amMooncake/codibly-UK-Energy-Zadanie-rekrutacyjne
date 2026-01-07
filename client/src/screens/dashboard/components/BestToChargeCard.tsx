@@ -5,6 +5,8 @@ import { Clock, Zap, Leaf } from "lucide-react"
 import { BestWindow } from "@/types";
 
 export default function BestTimeToChargeCard({ bestWindowData }: { bestWindowData: BestWindow | null }) {
+
+  // if task endpoint was different I would map through the data instead of hardcoding
   const sources = ["Biomass", "Nuclear", "Hydro", "Wind", "Solar"]
 
   const avgPerc = bestWindowData?.averageEcoPercent

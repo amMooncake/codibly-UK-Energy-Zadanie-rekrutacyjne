@@ -45,3 +45,13 @@ This will run on your local machine on port 8080 inside the container.
 ### run tests:
 cd server && npx vitest run
 cd client && npx vitest run
+
+---
+
+## Continuous Integration
+
+This repository includes a GitHub Actions workflow at `.github/workflows/ci.yml` that:
+
+- Installs dependencies for both `server` and `client`.
+- Builds each project (TypeScript compile for `server`, Vite build for `client`).
+- Runs tests using Vitest for both projects.

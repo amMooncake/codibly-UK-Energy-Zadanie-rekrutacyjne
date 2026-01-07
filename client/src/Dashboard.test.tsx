@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import HomeScreen from './screens/homeScreen/HomeScreen';
+import Dashboard from './screens/dashboard/Dashboard';
 import { DailyData } from './types.js';
 
-vi.mock('./screens/homeScreen/components/PieChart', () => ({
+vi.mock('./screens/dashboard/components/PieChart', () => ({
   default: ({ date }: any) => <div>{date}</div>,
 }));
 
@@ -38,7 +38,7 @@ describe('Dashboard Component', () => {
       json: async () => mockData,
     });
 
-    render(<HomeScreen generationData={mockData} />);
+    render(<Dashboard generationData={mockData} />);
 
     await waitFor(() => {
       expect(screen.getByText("UK Energy Mix Forecast")).toBeInTheDocument();

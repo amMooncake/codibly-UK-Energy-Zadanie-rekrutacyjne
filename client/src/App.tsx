@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import LoadingScreen from "./screens/loadingScreen/LoadingScreen";
-import HomeScreen from './screens/homeScreen/HomeScreen';
+import DashBoard from './screens/dashboard/Dashboard';
 
 
 import { DailyData } from './types.js';
@@ -21,7 +21,7 @@ function App() {
         {generationData.length === 0 ? (
           <LoadingScreen></LoadingScreen>
         ) : (
-          <HomeScreen generationData={generationData}></HomeScreen>
+          <DashBoard generationData={generationData}></DashBoard>
         )}
       </div>
     </>
