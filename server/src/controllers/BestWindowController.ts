@@ -4,8 +4,54 @@ import { IntervalData } from '../types.js';
 
 const ECO_FUELS: string[] = ["biomass", "nuclear", "hydro", "wind", "solar"];
 
+
+export const calculateEcoPercentage = (intervalData: IntervalData[], hours: number) => {
+    const windowSize = hours * 2; // API returns 30-minute intervals
+    let bestWindow: { from: string; to: string; averageEcoPercent: number } = {
+        from: "",
+        to: "",
+        averageEcoPercent: 0
+    };
+    let maxAvgEco = -1;
+
+
+    for (let i = 0; i <= intervalData.length - windowSize; i++) {
+        let windowEcoSum = 0;
+
+        for (let ii = 0; ii < windowSize; ii++) {
+            const interval = intervalData[i + ii];
+
+            // sum window
+            let intervalEcoTotal = 0;
+            for (const item of interval.generationmix) {
+                if (ECO_FUELS.includes(item.fuel)) {
+                    intervalEcoTotal += item.perc;
+                }
+            }
+            windowEcoSum += intervalEcoTotal;
+        }
+
+        const currentAvgEco = windowEcoSum / windowSize;
+
+        // check if calculated eco window procentage is grater than max
+        if (currentAvgEco > maxAvgEco) {
+            maxAvgEco = currentAvgEco;
+            bestWindow = {
+                from: intervalData[i].from,
+                to: intervalData[i + windowSize - 1].to,
+                averageEcoPercent: Math.round(currentAvgEco * 100) / 100
+            };
+        }
+    }
+    return bestWindow;
+};
+
+
+
 export const calculateBestChargingWindow = async (req: Request, res: Response) => {
     const { hours } = req.body;
+
+    let bestWindow;
 
     // TODO prevent inputing wrong data on client side
     if (!hours || typeof hours !== 'number' || hours < 1 || hours > 6) {
@@ -26,43 +72,7 @@ export const calculateBestChargingWindow = async (req: Request, res: Response) =
             return res.status(500).json({ error: 'Failed to retrieve generation data.' });
         }
 
-        const windowSize = hours * 2; // API returns 30-minute intervals
-        let bestWindow: { from: string; to: string; averageEcoPercent: number } = {
-            from: "",
-            to: "",
-            averageEcoPercent: 0
-        };
-        let maxAvgEco = -1;
-
-
-        for (let i = 0; i <= intervalData.length - windowSize; i++) {
-            let windowEcoSum = 0;
-
-            for (let ii = 0; ii < windowSize; ii++) {
-                const interval = intervalData[i + ii];
-                
-                // sum window
-                let intervalEcoTotal = 0;
-                for (const item of interval.generationmix) {
-                    if (ECO_FUELS.includes(item.fuel)) {
-                        intervalEcoTotal += item.perc;
-                    }
-                }
-                windowEcoSum += intervalEcoTotal;
-            }
-
-            const currentAvgEco = windowEcoSum / windowSize;
-
-            // check if calculated eco window procentage is grater than max
-            if (currentAvgEco > maxAvgEco) {
-                maxAvgEco = currentAvgEco;
-                bestWindow = {
-                    from: intervalData[i].from,
-                    to: intervalData[i + windowSize - 1].to,
-                    averageEcoPercent: Math.round(currentAvgEco * 100) / 100
-                };
-            }
-        }
+        bestWindow = calculateEcoPercentage(intervalData, hours);
 
         res.json(bestWindow);
 
