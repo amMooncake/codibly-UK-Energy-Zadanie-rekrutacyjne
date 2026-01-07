@@ -1,6 +1,6 @@
-# UK Energy Carbon Intensity Dashboard
+# EcoCharge UK
 
-This projectprovide data on the carbon intensity of the UK's national grid. It fetches data from the National Grid ESO API to display the current fuel mix for energy generation and calculates the optimal time window to charge.
+This project provide data on the generation mix the UK's national grid. It fetches data from the National Grid ESO API to display the current fuel mix for energy generation and calculates the optimal time window to charge.
 
 visit the website: https://codibly-uk-energy-zadanie-rekrutacyjne.onrender.com/
 
